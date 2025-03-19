@@ -2,7 +2,7 @@ import os
 import pandas as pd
 from multiprocessing import cpu_count, freeze_support, Pool
 import argparse
-from typing import Optional
+from typing import Union, Optional
 
 # Get root directory of script
 rootDir = os.path.dirname(os.path.abspath(__file__)) + '/'
@@ -423,7 +423,7 @@ if __name__ == "__main__":
     parser.add_argument('-n', '--nFilesPerBatch', type=int, metavar='', default=nFilesPerBatch, help='Number of files per batch. Defaults to ' + str(nFilesPerBatch))
     parser.add_argument('-c', '--nCpuWorkers', type=int, metavar='', default=nCpuWorkers, help='Number of CPU workers. Defaults to ' + str(nCpuWorkers))
     parser.add_argument('-b', '--batchSize', type=int, metavar='', default=batchSize, help='Batch size. Defaults to ' + str(batchSize))
-    parser.add_argument('-g', '--gpuIx', type=Optional[int], metavar='', default=gpuIx, help='GPU index. Defaults to ' + str(gpuIx))
+    parser.add_argument('-g', '--gpuIx', type=int, metavar='',  help='GPU index. Defaults to None')
 
     parser.add_argument('-t', '--minConfidenceThreshold', type=float, metavar='', default=minConfidenceThreshold, help='Minimum confidence threshold. Defaults to ' + str(minConfidenceThreshold))
     parser.add_argument('-s', '--stepDuration', type=float, metavar='', default=2.0, help='Step duration in seconds. Defaults to ' + str(stepDuration))
