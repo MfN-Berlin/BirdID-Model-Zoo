@@ -409,6 +409,13 @@ if __name__ == "__main__":
 
     parser.add_argument('-m', '--modelID', type=str, metavar='', default=modelID, help='Model ID. Defaults to ' + modelID)
     parser.add_argument('-o', '--outputRootDir', type=str, metavar='', default=outputRootDir, help='Output root directory. Defaults to ' + outputRootDir)
+    parser.add_argument(
+        '-ov',
+        '--outputRootDirVolume',
+        type=str,
+        metavar='',
+        help='If you use the dockerized script you have to set here the Output root directory on the host machine',
+    )
 
     parser.add_argument('-i', '--inputDirOrTextFilePath', type=str, metavar='', default=inputTextFilePath, help='Input directory or path of text file with list of file paths. Defaults to ' + inputTextFilePath)
     
@@ -436,7 +443,7 @@ if __name__ == "__main__":
     ## Assign arguments to variables
     modelID = args.modelID
     outputRootDir = args.outputRootDir
-
+    outputRootDirVolume = args.outputRootDirVolume
     inputDirOrTextFilePath = args.inputDirOrTextFilePath
 
     workerId = args.workerId
@@ -478,7 +485,7 @@ if __name__ == "__main__":
 
     # Run model
     getModelResults(modelID, 
-                    outputRootDir, 
+                    outputRootDirVolume if outputRootDirVolume else outputRootDir, 
                     listOfFilePathsOrFolder, 
                     workerId=workerId, 
                     nFilesPerBatch=nFilesPerBatch, 
