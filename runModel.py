@@ -624,6 +624,14 @@ if __name__ == "__main__":
         metavar="",
         help="Change output owner to this user:group. Defaults to None",
     )
+
+    parser.add_argument(
+        "--containerPrefix",
+        type=str,
+        metavar="",
+        default="bmz_",
+        help="Container prefix. Defaults to bmz_",
+    )
     # To check and add
     # parser.add_argument('-r', '--removeContainer', action='store_true', help='Remove container after run. Defaults to True')
 
@@ -647,6 +655,7 @@ if __name__ == "__main__":
     sharedMemorySizeStr = args.sharedMemorySizeStr
     removeTemporaryResultFiles = args.removeTemporaryResultFiles
     fileOutputFormats = args.fileOutputFormats
+    containerPrefix = args.containerPrefix
     # removeContainer = args.removeContainer
 
     # Check if inputDirOrTextFilePath is existing file or folder
@@ -684,6 +693,7 @@ if __name__ == "__main__":
         stepDuration=stepDuration,
         sharedMemorySizeStr=sharedMemorySizeStr,
         removeContainer=True,
+        containerPrefix=containerPrefix,
     )
 
     # Post process results
