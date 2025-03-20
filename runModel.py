@@ -92,6 +92,7 @@ def getModelResults(
     stepDuration=2.0,
     sharedMemorySizeStr="4g",
     removeContainer=True,
+    containerPrefix="bmz_",
 ):
 
     if modelID not in dockerConfig:
@@ -103,7 +104,7 @@ def getModelResults(
 
     ## Define Docker run command string depending on model
 
-    dockerCommand = "docker run --name " + modelID
+    dockerCommand = "docker run --name " + containerPrefix + modelID
 
     # Add instance index to name if multiple instances of the same model are run in parallel
     if workerId is not None:
