@@ -144,6 +144,38 @@ def getLabelsBirdNetPlus():
 
     return labels
 
+def getLabelsBirdNetPlus11K():
+
+    # Load labels
+    path = rootDir + 'LabelToIdMappings/ModelLabelFiles/BirdNET+_V3.0-preview3_Global_11K_Labels.csv'
+    
+    df_labels = pd.read_csv(path, sep=';')
+    print(df_labels)
+
+    '''
+            idx     id                  sci_name                     com_name class          order
+    0          0      3         Abeillia abeillei  Emerald-chinned Hummingbird  Aves    Apodiformes
+    1          1      5    Abroscopus albogularis         Rufous-faced Warbler  Aves  Passeriformes
+    2          2      6    Abroscopus schisticeps          Black-faced Warbler  Aves  Passeriformes
+    3          3      7  Abroscopus superciliaris       Yellow-bellied Warbler  Aves  Passeriformes
+    4          4      9            Aburria aburri                 Wattled Guan  Aves    Galliformes
+    ...      ...    ...                       ...                          ...   ...            ...
+    11555  11555  17924     Zosterops uropygialis          Kai Kecil White-eye  Aves  Passeriformes
+    11556  11556  17925        Zosterops vaughani              Pemba White-eye  Aves  Passeriformes
+    11557  11557  17927          Zosterops virens               Cape White-eye  Aves  Passeriformes
+    11558  11558  17929     Zosterops xanthochroa       Green-backed White-eye  Aves  Passeriformes
+    11559  11559  17934    Zosterornis whiteheadi       Chestnut-faced Babbler  Aves  Passeriformes
+    '''
+
+    # Manually fix sci_name: Homo Sapiens --> People--Field Observations at id 12375
+    df_labels.loc[df_labels['id'] == 12375, 'sci_name'] = 'People--Field Observations'
+
+    # Get sciNames as labels (column sci in df_labels)
+    labels = df_labels['sci_name'].tolist()
+    #print(labels)
+
+    return labels
+
 
 def createLabelToIdMapping(labels, modelID):
 
@@ -240,9 +272,12 @@ def createLabelToIdMapping(labels, modelID):
 # createLabelToIdMapping(labels, 'birdid-europe254-medium')
 # createLabelToIdMapping(labels, 'birdid-europe254-large')
 
-labels = getLabelsBirdNetPlus()
-createLabelToIdMapping(labels, 'birdnetplus-v3.0_euna_1k_preview2')
-createLabelToIdMapping(labels, 'birdnetplus-v3.0_euna_1k_ps2_effnetv2')
+# labels = getLabelsBirdNetPlus()
+# createLabelToIdMapping(labels, 'birdnetplus-v3.0_euna_1k_preview2')
+# createLabelToIdMapping(labels, 'birdnetplus-v3.0_euna_1k_ps2_effnetv2')
+
+# labels = getLabelsBirdNetPlus11K()
+# createLabelToIdMapping(labels, 'birdnetplus-v3.0_global_11k_preview3')
 
 
 
